@@ -1,0 +1,10 @@
+# Cloudflare Pages config. The D1 binding powers the tiny self-hosted
+# analytics at /api/hit (write) and /api/stats (read).
+name = "airfryerconvert"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-06-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "airfryer-analytics"
+database_id = "f809443c-2768-47e4-82ed-6caba797ee70"
