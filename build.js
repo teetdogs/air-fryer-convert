@@ -25,6 +25,7 @@ function page({ title, desc, path, body, jsonLd }) {
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${ORIGIN}${path}">
+<meta name="google-site-verification" content="LcpnVLHXPmKgp6twzPgq8_SUbKhG1YailyAN24X9TO4">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${ORIGIN}${path}">
@@ -214,6 +215,7 @@ for (const f of foods) {
 }
 
 copyFileSync("src/styles.css", `${OUT}/styles.css`);
+if (existsSync("src/google3b9dddb74fd3526a.html")) copyFileSync("src/google3b9dddb74fd3526a.html", `${OUT}/google3b9dddb74fd3526a.html`);
 copyFileSync("src/app.js", `${OUT}/app.js`);
 if (existsSync("src/og.png")) copyFileSync("src/og.png", `${OUT}/og.png`);
 
