@@ -135,7 +135,8 @@ or look up any of ${foods.length} common foods in the cheat sheet below.</p>
 </section>
 
 <h2 style="font-size:1.1rem">Quick oven-temperature conversions</h2>
-<div class="related">${[300, 325, 350, 375, 400, 425, 450].map((t) => `<a href="/convert/${t}-oven-to-air-fryer/">${t}°F oven</a>`).join("")}</div>`;
+<div class="related">${[300, 325, 350, 375, 400, 425, 450].map((t) => `<a href="/convert/${t}-oven-to-air-fryer/">${t}°F oven</a>`).join("")}
+${[140, 150, 160, 170, 180, 190, 200, 220].map((c) => `<a href="/convert/${c}c-oven-to-air-fryer/">${c}°C oven</a>`).join("")}</div>`;
 
 const homeJsonLd = {
   "@context": "https://schema.org",
@@ -220,6 +221,66 @@ ${related.length ? `<h2 style="font-size:1.1rem">Foods that cook near ${af}°F i
   };
 
   return page({ title, desc, path: `/convert/${f}-oven-to-air-fryer/`, body, jsonLd });
+}
+
+// ── Celsius oven-temp pages (/convert/180c-oven-to-air-fryer/) ────────
+// UK/EU searchers ask "180 c oven to air fryer" — °C recipes also often
+// state fan-oven temps, so each page answers both cases.
+const C_TEMPS = [140, 150, 160, 170, 180, 190, 200, 220];
+const cToF = (c) => Math.round((c * 9 / 5 + 32) / 5) * 5;
+
+function convertPageC(c) {
+  const af = c - 15;        // from a conventional °C recipe
+  const afFan = c - 5;      // from a fan/convection °C recipe
+  const times = [10, 15, 20, 25, 30, 45, 60];
+  const title = `${c}°C Oven to Air Fryer Conversion — Use ${af}°C and Less Time`;
+  const desc = `A ${c}°C oven recipe converts to about ${af}°C in an air fryer (${afFan}°C if the recipe was for a fan oven), with roughly 20% less cooking time.`;
+
+  const rows = times.map((t) => `
+    <tr><td class="t">${t} min</td><td class="t">${Math.round(t * 0.8)} min</td></tr>`).join("");
+  const others = C_TEMPS.filter((t) => t !== c);
+
+  const body = `
+<p class="crumb"><a href="/">← Calculator &amp; cheat sheet</a> / Oven conversions (°C)</p>
+<h1>${c}°C Oven to Air Fryer</h1>
+<div class="stat-row">
+  <div class="box"><div class="lbl">Oven says</div><div class="big">${c}°C</div><div class="lbl">${cToF(c)}°F</div></div>
+  <div class="box"><div class="lbl">Air fryer setting</div><div class="big">${af}°C</div><div class="lbl">from conventional</div></div>
+  <div class="box"><div class="lbl">If fan oven recipe</div><div class="big">${afFan}°C</div><div class="lbl">smaller drop</div></div>
+</div>
+<div class="card">
+  <h2 style="margin-top:0">Converted cooking times at ${c}°C</h2>
+  <table class="foods">
+    <thead><tr><th>Oven time (${c}°C)</th><th>Air fryer time (${af}°C)</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>
+  <p class="rule-note">From a conventional oven recipe, drop about 15°C and cut the time about 20%.
+  Fan (convection) recipes already assume circulating air, so the change is smaller: about −5°C and −10% time.
+  Start checking a few minutes early — air fryer models vary.</p>
+</div>
+<p>Different temperature or time? The <a href="/">conversion calculator</a> handles any recipe in °C or °F.</p>
+<h2 style="font-size:1.1rem">Other oven temperatures</h2>
+<div class="related">${others.map((t) => `<a href="/convert/${t}c-oven-to-air-fryer/">${t}°C oven</a>`).join("")}
+${OVEN_TEMPS.map((t) => `<a href="/convert/${t}-oven-to-air-fryer/">${t}°F oven</a>`).join("")}</div>`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `What is ${c} degrees Celsius in an air fryer?`,
+        acceptedAnswer: { "@type": "Answer", text: `A ${c}°C conventional oven temperature converts to about ${af}°C in an air fryer (use ${afFan}°C if the recipe was written for a fan oven). Also reduce cooking time by roughly 20%.` },
+      },
+      {
+        "@type": "Question",
+        name: `How long do I cook a ${c}°C oven recipe in the air fryer?`,
+        acceptedAnswer: { "@type": "Answer", text: `Multiply the oven time by 0.8 at ${af}°C: a 20-minute oven recipe takes about 16 minutes. Check early — models vary.` },
+      },
+    ],
+  };
+
+  return page({ title, desc, path: `/convert/${c}c-oven-to-air-fryer/`, body, jsonLd });
 }
 
 // ── Public live-stats page (/stats/) ──────────────────────────────────
@@ -340,6 +401,11 @@ for (const t of OVEN_TEMPS) {
   writeFileSync(`${OUT}/convert/${t}-oven-to-air-fryer/index.html`, convertPage(t));
 }
 
+for (const c of C_TEMPS) {
+  mkdirSync(`${OUT}/convert/${c}c-oven-to-air-fryer`, { recursive: true });
+  writeFileSync(`${OUT}/convert/${c}c-oven-to-air-fryer/index.html`, convertPageC(c));
+}
+
 mkdirSync(`${OUT}/stats`, { recursive: true });
 writeFileSync(`${OUT}/stats/index.html`, statsPage());
 
@@ -357,7 +423,8 @@ if (existsSync("indexnow-key.txt")) {
 }
 
 const urls = ["/", ...foods.map((f) => `/foods/${f.slug}/`),
-  ...OVEN_TEMPS.map((t) => `/convert/${t}-oven-to-air-fryer/`), "/stats/"];
+  ...OVEN_TEMPS.map((t) => `/convert/${t}-oven-to-air-fryer/`),
+  ...C_TEMPS.map((c) => `/convert/${c}c-oven-to-air-fryer/`), "/stats/"];
 writeFileSync(`${OUT}/sitemap.xml`,
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
   urls.map((u) => `  <url><loc>${ORIGIN}${u}</loc></url>`).join("\n") +
