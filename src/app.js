@@ -11,11 +11,16 @@
     var temp = parseFloat(tempEl.value);
     var time = parseFloat(timeEl.value);
     var convection = $("convection").checked;
+    var fryer = $("fryer") ? $("fryer").value : "standard";
 
     // Rule of thumb: drop temp 25°F (15°C) and cut time ~20%. Convection
     // ovens already run "hotter", so the adjustment is smaller from there.
+    // Wattage/basket size shifts the time too (community feedback): compact
+    // low-wattage units need longer, big oven-style units run faster.
     var tempDrop = unit === "F" ? (convection ? 10 : 25) : (convection ? 5 : 15);
     var timeFactor = convection ? 0.9 : 0.8;
+    if (fryer === "compact") timeFactor += 0.08;
+    if (fryer === "large") timeFactor -= 0.05;
 
     var outTemp = $("out-temp"), outTime = $("out-time");
     if (isNaN(temp) || temp <= 0) {
@@ -60,6 +65,7 @@
   if ($("oven-temp")) {
     ["oven-temp", "oven-time"].forEach(function (id) { $(id).addEventListener("input", convert); });
     $("convection").addEventListener("change", convert);
+    if ($("fryer")) $("fryer").addEventListener("change", convert);
     $("btn-f").addEventListener("click", function () { setUnit("F"); });
     $("btn-c").addEventListener("click", function () { setUnit("C"); });
     $("swap").addEventListener("click", function () { setDirection(!reversed); });

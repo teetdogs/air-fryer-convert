@@ -107,6 +107,13 @@ or look up any of ${foods.length} common foods in the cheat sheet below.</p>
     </div>
   </div>
   <label class="check"><input id="convection" type="checkbox"> My recipe is for a convection / fan oven</label>
+  <label class="check">My air fryer:
+    <select id="fryer">
+      <option value="standard" selected>Standard basket (1500–1800W)</option>
+      <option value="compact">Compact / low wattage (&lt;1500W) — runs slower</option>
+      <option value="large">Large or oven-style (1800W+) — runs faster</option>
+    </select>
+  </label>
   <div class="result">
     <div class="box"><div class="lbl"><span class="out-word">Air fryer</span> temp</div><div class="big" id="out-temp">375°F</div></div>
     <div class="box"><div class="lbl"><span class="out-word">Air fryer</span> time</div><div class="big" id="out-time">16 min</div></div>
@@ -284,6 +291,8 @@ function foodPage(f) {
   <h2 style="margin-top:0">How to make it</h2>
   <ol class="steps">${steps.map((s) => `<li>${s}</li>`).join("")}</ol>
   <p><strong>Tip:</strong> ${esc(f.note)}</p>
+  <p class="rule-note">Times assume a standard 1500–1800W basket air fryer. Compact or very full
+  baskets can need 2–3 extra minutes; large oven-style units often finish a bit sooner.</p>
 </div>
 <p>Cooking from an oven recipe instead? The <a href="/">conversion calculator</a> turns any oven temperature and time into air fryer settings.</p>
 <h2 style="font-size:1.1rem">More ${esc(f.cat.toLowerCase())}</h2>
