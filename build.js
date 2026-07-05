@@ -45,7 +45,8 @@ ${jsonLd ? `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script
 ${body}
 </main>
 <footer class="site wrap">
-  <p>AirFryerConvert is a free tool — no ads, no signup, no cookies.</p>
+  <p>AirFryerConvert is a free tool — no ads, no signup, no cookies.
+     <a href="https://github.com/teetdogs/air-fryer-convert">Open source on GitHub</a>.</p>
   <p class="disclaimer">Times and temperatures are guidelines for standard basket air fryers; models vary.
      Always confirm meat and poultry reach a safe internal temperature with a food thermometer.</p>
 </footer>
