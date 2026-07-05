@@ -219,6 +219,7 @@ copyFileSync("src/styles.css", `${OUT}/styles.css`);
 if (existsSync("src/google3b9dddb74fd3526a.html")) copyFileSync("src/google3b9dddb74fd3526a.html", `${OUT}/google3b9dddb74fd3526a.html`);
 copyFileSync("src/app.js", `${OUT}/app.js`);
 if (existsSync("src/og.png")) copyFileSync("src/og.png", `${OUT}/og.png`);
+if (existsSync("src/pin.png")) copyFileSync("src/pin.png", `${OUT}/pin.png`);
 
 // IndexNow key file (lets us ping search engines about new/changed URLs)
 if (existsSync("indexnow-key.txt")) {
