@@ -84,3 +84,5 @@ first, then 2–3 popular food pages (chicken-wings, salmon, frozen-french-fries
 cd ~/Documents/air-fryer-convert
 node build.js && npx wrangler pages deploy
 ```
+
+- 2026-07-05: Tailored second post to r/ClaudeAI (autonomy field-report angle, "Built with Claude" flair): https://redd.it/1uo3acw — different story for a different audience, not a copy-paste crosspost. Skipped blast-crossposting deliberately.
