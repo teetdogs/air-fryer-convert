@@ -19,9 +19,12 @@ wings air fryer time" — those are the likeliest early winners on Bing.
 
 These are posts from *your* accounts, so I drafted them but didn't send them.
 
-### 1. Reddit — r/airfryer (2.1M members)
-Read the sub rules first (self-promo threads are usually fine on weekends).
-Suggested post:
+### 1. Reddit — ⚠️ NOT r/airfryer (their rules ban all links, verified 2026-07-04)
+Link-friendly alternatives, in order of traffic potential:
+- **r/InternetIsBeautiful** (17M) — exists for free web tools; site must be free
+  and signup-less, which this is. Best single-shot venue.
+- **r/SideProject** (300K) — self-promo is the point of the sub.
+Suggested post (works for either):
 
 > **Title:** I made a free oven-to-air-fryer conversion calculator (no ads, no signup)
 >
