@@ -59,6 +59,19 @@ https://search.google.com/search-console — inspect
 `https://airfryerconvert.pages.dev/` → Request indexing. Do the homepage
 first, then 2–3 popular food pages (chicken-wings, salmon, frozen-french-fries).
 
+## Launch log
+
+- 2026-07-04: Posted (by Claude, with Brian's authorization, full AI disclosure):
+  r/SideProject text post · Pinterest pin ("Air Fryer Cooking" board) ·
+  Facebook friends post with Meta's AI label. First referral traffic arrived
+  from m.facebook.com within minutes. Reddit post hit 100 views in 14 min.
+- Skipped for rule compliance: r/airfryer (no links), r/InternetIsBeautiful
+  (no AI-generated content). HN Show HN blocked for new accounts — build a
+  little organic karma first, then retry.
+- 2026-07-04 (later): Added 7 oven-temp conversion pages (/convert/350-oven-to-air-fryer/ …),
+  public live-stats dashboard (/stats/), printable cheat sheet, reverse
+  (air fryer → oven) calculator mode. Site is now 74 pages; IndexNow re-pinged.
+
 ## Checking traffic
 
 - Quick look: https://airfryerconvert.pages.dev/api/stats
