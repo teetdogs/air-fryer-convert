@@ -1,6 +1,7 @@
 // Calculator + cheat-sheet search. No frameworks, no build-time deps.
 (function () {
   var unit = "F";
+  var reversed = false; // false: oven → air fryer, true: air fryer → oven
 
   function $(id) { return document.getElementById(id); }
 
@@ -20,7 +21,7 @@
     if (isNaN(temp) || temp <= 0) {
       outTemp.textContent = "—";
     } else {
-      var t = temp - tempDrop;
+      var t = reversed ? temp + tempDrop : temp - tempDrop;
       // Snap to the 5-degree marks most air fryer dials use.
       t = Math.round(t / 5) * 5;
       outTemp.textContent = t + "°" + unit;
@@ -28,9 +29,20 @@
     if (isNaN(time) || time <= 0) {
       outTime.textContent = "—";
     } else {
-      var m = Math.round(time * timeFactor);
+      var m = Math.round(reversed ? time / timeFactor : time * timeFactor);
       outTime.textContent = m + " min";
     }
+  }
+
+  function setDirection(rev) {
+    reversed = rev;
+    var inWord = rev ? "Air fryer" : "Oven";
+    var outWord = rev ? "Oven" : "Air fryer";
+    $("in-temp-word").textContent = inWord;
+    $("in-time-word").textContent = inWord.toLowerCase() === "oven" ? "Oven" : "Air fryer";
+    document.querySelectorAll(".out-word").forEach(function (el) { el.textContent = outWord; });
+    $("swap").textContent = rev ? "↔ Switch back: oven → air fryer" : "↔ Going the other way? Air fryer → oven";
+    convert();
   }
 
   function setUnit(u) {
@@ -50,6 +62,7 @@
     $("convection").addEventListener("change", convert);
     $("btn-f").addEventListener("click", function () { setUnit("F"); });
     $("btn-c").addEventListener("click", function () { setUnit("C"); });
+    $("swap").addEventListener("click", function () { setDirection(!reversed); });
     convert();
   }
 

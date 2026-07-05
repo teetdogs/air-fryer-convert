@@ -144,6 +144,31 @@ details { border-bottom: 1px solid var(--line); padding: 12px 0; }
 details summary { font-weight: 700; cursor: pointer; }
 details p { color: var(--muted); }
 
+.swap {
+  display: block; margin: 14px auto 0; background: none; border: 1px solid var(--line);
+  border-radius: 999px; padding: 7px 16px; color: var(--muted); font-weight: 600;
+  font-size: .85rem; cursor: pointer;
+}
+.swap:hover { border-color: var(--accent); color: var(--accent); }
+.print-btn {
+  float: right; background: none; border: 1px solid var(--line); border-radius: 8px;
+  padding: 5px 12px; font-size: .8rem; font-weight: 600; color: var(--muted); cursor: pointer;
+}
+.print-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+@media print {
+  header.site p.tag, .card, .search, .print-btn, footer.site p:first-child,
+  #food-search, .related, h2:not(.cat), .sub, h1 { display: none !important; }
+  #cheat-sheet h1 { display: block !important; font-size: 1.2rem; margin: 0 0 6px; }
+  body { background: #fff; color: #000; }
+  #cheat-sheet .cat-block { display: block !important; break-inside: avoid; }
+  table.foods td, table.foods th { padding: 4px 8px; font-size: 11px; }
+  table.foods td.note { display: table-cell !important; }
+  h2.cat { margin: 12px 0 2px; font-size: 12px; color: #000; }
+  footer.site { margin: 10px 0 0; }
+  .disclaimer { display: block; font-size: 9px; }
+}
+
 footer.site {
   margin: 48px 0 32px; padding-top: 20px; border-top: 1px solid var(--line);
   color: var(--muted); font-size: .85rem; text-align: center;
