@@ -414,6 +414,9 @@ if (existsSync("src/google3b9dddb74fd3526a.html")) copyFileSync("src/google3b9dd
 copyFileSync("src/app.js", `${OUT}/app.js`);
 if (existsSync("src/og.png")) copyFileSync("src/og.png", `${OUT}/og.png`);
 if (existsSync("src/pin.png")) copyFileSync("src/pin.png", `${OUT}/pin.png`);
+mkdirSync(`${OUT}/pins`, { recursive: true });
+if (existsSync("src/pin-wings.png")) copyFileSync("src/pin-wings.png", `${OUT}/pins/wings.png`);
+if (existsSync("src/pin-pizza.png")) copyFileSync("src/pin-pizza.png", `${OUT}/pins/pizza.png`);
 if (existsSync("src/_headers")) copyFileSync("src/_headers", `${OUT}/_headers`);
 
 // IndexNow key file (lets us ping search engines about new/changed URLs)

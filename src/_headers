@@ -1,2 +1,4 @@
 /pin.png
   Access-Control-Allow-Origin: *
+/pins/*
+  Access-Control-Allow-Origin: *
